@@ -20,8 +20,19 @@
     <body>
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
             {{ $slot }}
-        </div>
+            </main>
 
+
+        </div>
+                 <!-- Footer -->
+            <footer class="bg-white dark:bg-gray-800 shadow mt-auto">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                    &copy; {{ date('Y') }} Farm-ERP. All rights reserved.
+                    Version {{ config('erp.version', '1.0.0') }}
+                </div>
+            </footer>
+
+        @stack('modals')
         @livewireScripts
     </body>
 </html>
