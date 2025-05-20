@@ -20,7 +20,7 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -33,13 +33,20 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-grow">
                 {{ $slot }}
             </main>
+
+            <!-- Footer -->
+            <footer class="bg-white dark:bg-gray-800 shadow mt-auto">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                    &copy; {{ date('Y') }} Farm-ERP. All rights reserved.
+                    Version {{ config('erp.version', '1.0.0') }}
+                </div>
+            </footer>
         </div>
 
         @stack('modals')
-
         @livewireScripts
     </body>
 </html>
