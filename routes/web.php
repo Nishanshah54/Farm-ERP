@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('guest-home-page');
-});
+})->name('test');
 
 Route::middleware([
     'auth:sanctum',

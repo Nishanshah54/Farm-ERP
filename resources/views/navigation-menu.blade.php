@@ -3,6 +3,82 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
+@php
+                $navItems = [
+    [
+        'title' => 'Create Crop Plan',
+        // 'route' => 'crop.plan.create',
+          'route'=>'test',
+        'group' => 2,
+        'roles' => ['admin', 'manager'],
+    ],
+    [
+        'title' => 'Schedule Activities',
+        'route'=>'test',
+        // 'route' => 'crop.activities.schedule',
+        'group' => 3,
+        'roles' => ['admin', 'manager'],
+    ],
+    [
+        'title' => 'Forecast Inputs',
+        'route'=>'test',
+        // 'route' => 'inputs.forecast',
+        'group' => 3,
+        'roles' => ['manager'],
+    ],
+    [
+        'title' => 'Assign Fields',
+        'route'=>'test',
+        // 'route' => 'fields.assign',
+        'group' => 3,
+        'roles' => ['admin', 'manager'],
+    ],
+    [
+        'title' => 'Log Field Activities',
+        'route'=>'test',
+        // 'route' => 'activities.log',
+        'group' => 3,
+        'roles' => ['manager', 'officer'],
+    ],
+    [
+        'title' => 'Record Pest/Disease Reports',
+        'route'=>'test',
+        // 'route' => 'health.pest.report',
+        'group' => 4,
+        'roles' => ['officer', 'agronomist'],
+    ],
+    [
+        'title' => 'Track Growth Stages',
+        'route'=>'test',
+        // 'route' => 'growth.track',
+        'group' => 4,
+        'roles' => ['agronomist'],
+    ],
+    [
+        'title' => 'Log Harvest Data',
+        'route'=>'test',
+        // 'route' => 'harvest.log',
+        'group' => 4,
+        'roles' => ['officer'],
+    ],
+    [
+        'title' => 'Monitor Performance',
+        'route'=>'test',
+        // 'route' => 'performance.monitor',
+        'group' => 5,
+        'roles' => ['manager', 'agronomist'],
+    ],
+    [
+        'title' => 'Generate Reports',
+        'route'=>'test',
+        // 'route' => 'reports.generate',
+        'group' => 5,
+        'roles' => ['manager', 'accountant'],
+    ],
+];
+// $userRole=['manager','accountant','admin'];
+$userRole = auth()->user()->role;
+       @endphp
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -11,11 +87,18 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+@php
+    $userRole = auth()->user()->role; // Or array of roles if user has many
+@endphp
+
+@foreach ($navItems as $item)
+    @if (in_array($userRole, $item['roles']))
+        <x-nav-link href="{{ route($item['route']) }}" :active="request()->routeIs($item['route'])">
+            {{ __($item['title']) }}
+        </x-nav-link>
+    @endif
+@endforeach
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
