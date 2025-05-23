@@ -7,8 +7,8 @@
                 $navItems = [
     [
         'title' => 'Create Crop Plan',
-        // 'route' => 'crop.plan.create',
-          'route'=>'test',
+        'route' => 'crop-plans.create',
+        //   'route'=>'test',
         'group' => 2,
         'roles' => ['admin', 'manager'],
     ],
