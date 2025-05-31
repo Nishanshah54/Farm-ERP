@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestEmail;
 use Illuminate\Http\Request;
 use App\Models\CropPlan;
 use App\Models\Crop;
 use App\Models\Field;
+use Illuminate\Support\Facades\Mail;
 
 
 class CropPlanController extends Controller
@@ -14,6 +16,7 @@ class CropPlanController extends Controller
     {
         $fields = Field::all();
         $crops = Crop::all();
+       Mail::to('example@example.com')->send(new TestEmail());
         return view('crop_plans.create', compact('fields', 'crops'));
     }
 
